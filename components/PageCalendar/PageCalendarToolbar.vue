@@ -7,6 +7,8 @@ import { Collections, type PublisherResponse } from "@/types/pb";
 const runtimeConfig = useRuntimeConfig();
 const { $pb } = useNuxtApp();
 
+const toolbar = ref<HTMLDivElement>();
+
 const { data: publisherOptions } = useAsyncData(
   () => $pb.collection(Collections.Publisher).getFullList<PublisherResponse>(),
   {
@@ -45,20 +47,23 @@ const currentPublishers = computed({
   get: () => props.publishers,
   set: (value) => emit("update:publishers", value),
 });
+
+onMounted(() => {
+  if (toolbar.value)
+    document.documentElement.style.setProperty(
+      "--toolbar-height",
+      toolbar.value.clientHeight + "px",
+    );
+});
 </script>
 
 <template>
-  <div class="sticky top-0 z-10 mb-3 bg-gray-50 dark:bg-gray-900">
+  <div ref="toolbar" class="sticky top-0 z-20 mb-3 bg-gray-50 dark:bg-gray-900">
     <div class="container mx-auto px-6 py-3">
       <div
         class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center"
       >
         <div class="flex items-center gap-3">
-          <div class="flex items-center gap-3 text-gray-500">
-            <img class="h-9 w-auto" src="/truyenbanquyen.png" />
-            <UIcon name="i-fluent-slash-forward-20-filled" class="text-2xl" />
-          </div>
-
           <div class="flex gap-1">
             <div class="flex">
               <UButton
