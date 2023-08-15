@@ -23,7 +23,6 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/": { prerender: true, isr: 3600 },
-    "/calendar": { prerender: true, isr: 3600 },
   },
   image: {
     provider: "imagor",
