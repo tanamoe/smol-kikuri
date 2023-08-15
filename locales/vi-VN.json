@@ -1,0 +1,92 @@
+{
+  "general": {
+    "home": "Trang chủ",
+    "wiki": "Wiki",
+    "releaseCalendar": "Lịch phát hành",
+    "settings": "Cài đặt",
+    "jumpToTop": "Lên đầu trang",
+    "filter": "Lọc",
+    "options": "Tuỳ chọn",
+    "print": "In",
+    "download": "Tải về",
+    "error": "Lỗi",
+    "success": "Thành công",
+    "categories": "Thể loại",
+    "darkMode": "Nền tối",
+    "lightMode": "Nền sáng",
+    "systemColorMode": "Tự động",
+    "releaseDate": "Ngày phát hành",
+    "price": "Giá bìa",
+    "name": "Tên",
+    "volume": "Tập",
+    "volumeNumber": "Tập {volume}",
+    "coverImages": "Ảnh bìa",
+    "edition": "Phiên bản",
+    "recentPosts": "Bài viết gần đây",
+    "justAddedManga": "Truyện vừa cập nhật",
+    "dateRelease": "Phát hành ngày {date}",
+    "viewTitleDetails": "Xem chi tiết",
+    "bookPrice": "Giá dự kiến",
+    "publishedBy": "Phát hành bởi",
+    "publisher": "Nhà xuất bản"
+  },
+  "settings": {
+    "interface": "Hiển thị",
+    "showBookDetails": "Hiển thị thông tin sách bên dưới ảnh bìa",
+    "showBookPrice": "Hiển thị giá bán",
+    "showDigital": "Hiển thị lịch phát hành điện tử (e-book)",
+    "showEditionedBook": "Hiển thị các phiên bản khác (bản đặc biệt, bản giới hạn,...) của sách",
+    "digital": {
+      "show": "Có",
+      "hide": "Không",
+      "only": "Chỉ hiện lịch điện tử (e-book)"
+    }
+  },
+  "monthPicker": {
+    "reset": "Hiện tại",
+    "save": "Chọn"
+  },
+  "calendar": {
+    "noReleases": "Không tìm thấy!",
+    "noReleasesDescription": "Có thể lịch phát hành tháng này chưa có, quay lại sau nhé!",
+    "unknownError": "Lỗi không xác định",
+    "unknownErrorDescription": "Đã có gì đó sai sai xảy ra, hãy thử tải lại trang hoặc báo cáo với bọn mình..."
+  },
+  "footer": {
+    "providedByTana": "Cung cấp bởi Tana.moe",
+    "links": {
+      "blog": "Blog",
+      "about": "Giới thiệu",
+      "credits": "Credit",
+      "api": "API",
+      "status": "Status",
+      "sitemap": "Sitemap",
+      "tos": "Điều khoản",
+      "privacy": "Bảo mật",
+      "contact": "Liên hệ"
+    }
+  },
+  "error": {
+    "notFoundMessage": "Không tìm thấy đường dẫn",
+    "generalMessage": "Đã có lỗi xảy ra",
+    "returnHome": "Trở về trang chủ",
+    "usernameEmpty": "Tên tài khoản không được để trống",
+    "usernameIncludesSpace": "Tên tài khoản không được có dấu cách",
+    "emailInvalid": "Email không đúng định dạng",
+    "passwordShort": "Mật khẩu phải từ 8 ký tự",
+    "passwordNotMatch": "Xác nhận mật khẩu không trùng",
+    "displayNameLength": "Tên hiển thị phải từ 1-32 ký tự",
+    "bioLength": "Giới thiệu không được dài quá 280 ký tự"
+  },
+  "sort": {
+    "latest": "Mới cập nhật",
+    "oldest": "Cập nhật cũ nhất",
+    "nameAscending": "Tên tăng dần",
+    "nameDescending": "Tên giảm dần"
+  },
+  "provider": {
+    "facebook": "Facebook",
+    "twitter": "X",
+    "discord": "Discord"
+  }
+}
