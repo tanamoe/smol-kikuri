@@ -36,6 +36,12 @@ useHead({
 });
 
 useSeoMeta({
+  ogSiteName: "Truyện Bản Quyền",
+  ogLocale: "vi_VN",
+  ogType: "website",
+  ogImageHeight: "630",
+  ogImageWidth: "1200",
+  themeColor: "#f8b60b",
   twitterCard: "summary_large_image",
 });
 </script>

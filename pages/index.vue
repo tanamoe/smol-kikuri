@@ -71,16 +71,14 @@ onUnmounted(() => {
 });
 
 useSeoMeta({
+  title: "Lịch phát hành",
+  ogTitle: "Lịch phát hành",
   ogImage: joinURL(runtimeConfig.public.ogUrl, "calendar"),
 });
 </script>
 
 <template>
   <div>
-    <Head>
-      <Title>{{ $t("general.releaseCalendar") }}</Title>
-    </Head>
-
     <PageCalendarToolbar
       v-model:month="month"
       v-model:publishers="publishers"
