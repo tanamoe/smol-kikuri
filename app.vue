@@ -1,5 +1,6 @@
 <!-- eslint-disable import/no-named-as-default-member -->
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig();
 const i18nHead = useLocaleHead({
   addSeoAttributes: true,
 });
@@ -11,6 +12,13 @@ useHead({
   bodyAttrs: {
     class: "dark:bg-gray-900 bg-gray-50 text-gray-700 dark:text-gray-200",
   },
+    script: [
+    {
+      async: true,
+      src: runtimeConfig.public.umamiUrl,
+      "data-website-id": runtimeConfig.public.umamiSiteId,
+    },
+  ],
   link: [
     {
       rel: "apple-touch-icon",
