@@ -18,7 +18,7 @@ defineProps<{
     <div class="overflow-hidden text-ellipsis whitespace-nowrap">
       {{ $d(date, "weekdayShort") }}
     </div>
-    <div class="font-lexend text-4xl font-bold md:text-5xl">
+    <div class="font-montserrat text-4xl font-bold md:text-5xl">
       <span>
         {{ $d(date, "twoDigitDay") }}
       </span>
@@ -30,7 +30,7 @@ defineProps<{
   </div>
   <div
     v-if="datePosition === 'top'"
-    class="font-lexend py-2 text-2xl font-bold"
+    class="py-2 font-montserrat text-2xl font-bold"
   >
     {{ $d(date, "full") }}
   </div>

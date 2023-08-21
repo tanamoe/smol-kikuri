@@ -57,7 +57,7 @@ defineProps<{
     <div v-else>
       <ULink
         :to="joinURL('https://tana.moe/title/', book.expand?.title.id || '')"
-        class="font-montserrat block text-lg font-bold md:text-xl"
+        class="font-montserrat text-lg font-bold decoration-tbqblue-400 decoration-4 underline-offset-4 hover:underline md:text-xl"
       >
         {{ book.name }}
       </ULink>
