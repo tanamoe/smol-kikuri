@@ -27,11 +27,10 @@ defineProps<{
         {{ $d(date, "twoDigitMonth") }}
       </span>
     </div>
-    <div class="mt-3 flex"></div>
   </div>
   <div
     v-if="datePosition === 'top'"
-    class="font-lexend py-3 text-2xl font-bold"
+    class="font-lexend py-2 text-2xl font-bold"
   >
     {{ $d(date, "full") }}
   </div>
