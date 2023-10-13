@@ -37,7 +37,7 @@
   "dependencies": {
     "@iconify-json/fluent": "^1.1.26",
     "@iconify-json/simple-icons": "^1.1.65",
-    "@pinia/nuxt": "^0.4.11",
+    "@pinia/nuxt": "^0.5.0",
     "@popperjs/core": "^2.11.8",
     "class-variance-authority": "^0.7.0",
     "dayjs": "^1.11.9",
