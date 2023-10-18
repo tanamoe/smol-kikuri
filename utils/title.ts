@@ -1,17 +1,17 @@
 import {
   type BaseSystemFields,
-  type BookDetailedResponse,
+  type BooksDetailsResponse,
   Collections,
-  type FormatResponse,
-  type TitleResponse,
+  type FormatsResponse,
+  type TitlesResponse,
 } from "@/types/pb";
 
 export const getTitle = async (id: string) => {
   const { $pb } = useNuxtApp();
 
-  const data = await $pb.collection(Collections.Title).getOne<
-    TitleResponse<{
-      format: FormatResponse;
+  const data = await $pb.collection(Collections.Titles).getOne<
+    TitlesResponse<{
+      format: FormatsResponse;
     }>
   >(id, {
     expand: "format",
@@ -28,10 +28,10 @@ export const getTitleCoverImages = async (id: string) => {
   })[] = [];
 
   const data = await $pb
-    .collection(Collections.BookDetailed)
+    .collection(Collections.BooksDetails)
     .getFullList<
       Pick<
-        BookDetailedResponse,
+        BooksDetailsResponse,
         "id" | "collectionId" | "edition" | "cover" | "baseCover"
       >
     >({
