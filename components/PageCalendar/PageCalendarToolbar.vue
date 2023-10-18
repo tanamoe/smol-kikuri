@@ -2,15 +2,16 @@
 import { joinURL } from "ufo";
 import { type Dayjs } from "dayjs";
 import type { FilterPublishers } from "@/utils/releases";
-import { Collections, type PublisherResponse } from "@/types/pb";
+import { Collections, type PublishersResponse } from "@/types/pb";
 
 const runtimeConfig = useRuntimeConfig();
 const { $pb } = useNuxtApp();
 
 const toolbar = ref<HTMLDivElement>();
 
-const { data: publisherOptions } = useAsyncData(
-  () => $pb.collection(Collections.Publisher).getFullList<PublisherResponse>(),
+const { data: publisherOptions } = await useAsyncData(
+  () =>
+    $pb.collection(Collections.Publishers).getFullList<PublishersResponse>(),
   {
     transform: (publishers) =>
       publishers.map((publisher) => ({

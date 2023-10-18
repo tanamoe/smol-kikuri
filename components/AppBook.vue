@@ -3,15 +3,15 @@ import { storeToRefs } from "pinia";
 import { joinURL } from "ufo";
 
 import { useSettingsStore } from "@/stores/settings";
-import type { BookDetailedResponse, TitleResponse } from "@/types/pb";
+import type { BooksDetailsResponse, TitlesResponse } from "@/types/pb";
 
 const store = useSettingsStore();
 
 const { showBookDetails, showBookPrice } = storeToRefs(store);
 
 defineProps<{
-  book: BookDetailedResponse<{
-    title: TitleResponse;
+  book: BooksDetailsResponse<{
+    title: TitlesResponse;
   }>;
   sizes?: string;
 }>();

@@ -1,7 +1,7 @@
 import {
   Collections,
-  type BookDetailedResponse,
-  type TitleResponse,
+  type BooksDetailsResponse,
+  type TitlesResponse,
 } from "@/types/pb";
 
 /**
@@ -9,9 +9,9 @@ import {
  */
 export const getRecentBooks = async (count: number) => {
   const { $pb } = useNuxtApp();
-  const data = await $pb.collection(Collections.BookDetailed).getList<
-    BookDetailedResponse<{
-      title: TitleResponse;
+  const data = await $pb.collection(Collections.BooksDetails).getList<
+    BooksDetailsResponse<{
+      title: TitlesResponse;
     }>
   >(1, count, {
     sort: "-created",
@@ -31,8 +31,8 @@ export const getBooks = async (id: string) => {
   const { $pb } = useNuxtApp();
 
   const data = await $pb
-    .collection(Collections.BookDetailed)
-    .getFullList<BookDetailedResponse>({
+    .collection(Collections.BooksDetails)
+    .getFullList<BooksDetailsResponse>({
       filter: `release='${id}'`,
     });
 

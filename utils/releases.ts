@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import {
   Collections,
-  type BookDetailedResponse,
-  type PublisherResponse,
-  type TitleResponse,
-  type ReleaseResponse,
+  type BooksDetailsResponse,
+  type PublishersResponse,
+  type TitlesResponse,
+  type ReleasesResponse,
 } from "@/types/pb";
 
 export type FilterDigital = "show" | "hide" | "only";
@@ -50,10 +50,10 @@ export const getCalendarReleases = async (
 
   if (filters?.edition === false) filter.push("edition = ''");
 
-  const data = await $pb.collection(Collections.BookDetailed).getFullList<
-    BookDetailedResponse<{
-      title: TitleResponse;
-      publisher: PublisherResponse;
+  const data = await $pb.collection(Collections.BooksDetails).getFullList<
+    BooksDetailsResponse<{
+      title: TitlesResponse;
+      publisher: PublishersResponse;
     }>
   >({
     filter: filter.join(" && "),
@@ -64,9 +64,9 @@ export const getCalendarReleases = async (
   if (data.length === 0) return null;
 
   return groupBy<
-    BookDetailedResponse<{
-      title: TitleResponse;
-      publisher: PublisherResponse;
+    BooksDetailsResponse<{
+      title: TitlesResponse;
+      publisher: PublishersResponse;
     }>
   >(
     structuredClone(data).map((release) => ({
@@ -80,9 +80,9 @@ export const getCalendarReleases = async (
 export const getReleases = async (id: string) => {
   const { $pb } = useNuxtApp();
 
-  const data = await $pb.collection(Collections.Release).getFullList<
-    ReleaseResponse<{
-      publisher: PublisherResponse;
+  const data = await $pb.collection(Collections.Releases).getFullList<
+    ReleasesResponse<{
+      publisher: PublishersResponse;
     }>
   >({
     filter: `title='${id}'`,
@@ -96,9 +96,9 @@ export const getRecentReleases = async () => {
   const { $pb } = useNuxtApp();
   const now = dayjs.tz();
 
-  const data = await $pb.collection(Collections.BookDetailed).getFullList<
-    BookDetailedResponse<{
-      publisher: PublisherResponse;
+  const data = await $pb.collection(Collections.BooksDetails).getFullList<
+    BooksDetailsResponse<{
+      publisher: PublishersResponse;
     }>
   >({
     sort: "+publishDate",
