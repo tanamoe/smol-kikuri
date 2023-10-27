@@ -67,4 +67,5 @@ export default defineNuxtConfig({
     langDir: "locales",
     defaultLocale: "vi",
   },
+  experimental: { appManifest: false },
 });
