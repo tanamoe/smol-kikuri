@@ -1,12 +1,3 @@
-import dayjs from "dayjs";
-import {
-  Collections,
-  type BooksDetailsResponse,
-  type PublishersResponse,
-  type TitlesResponse,
-  type ReleasesResponse,
-} from "@/types/pb";
-
 export type FilterDigital = "show" | "hide" | "only";
 
 export type FilterPublishers = {
@@ -15,103 +6,38 @@ export type FilterPublishers = {
   [k: string]: any;
 };
 
-function groupBy<T>(arr: T[], fn: (item: T) => any) {
-  return arr.reduce<Record<string, T[]>>((prev, curr) => {
-    const groupKey = fn(curr);
-    const group = prev[groupKey] || [];
-    group.push(curr);
-    return { ...prev, [groupKey]: group };
-  }, {});
-}
-
-export const getCalendarReleases = async (
+export function parseCalendarFilter(
   from: string,
   to: string,
-  filters?: {
+  filters: {
     publishers?: string[];
     digital?: FilterDigital;
     edition?: boolean;
-  },
-) => {
-  const { $pb } = useNuxtApp();
+  } = {},
+) {
+  const { publishers, digital, edition } = filters;
 
-  const filter = [`publishDate >= '${from}'`, `publishDate <= '${to}'`];
+  const query = [`publishDate >= '${from}'`, `publishDate <= '${to}'`];
 
-  if (filters?.publishers && filters.publishers.length > 0) {
-    const p = [
-      ...filters.publishers.map((publisher) => `publisher.id = '${publisher}'`),
-    ].join(" || ");
-
-    filter.push("(" + p + ")");
+  if (publishers && publishers.length > 0) {
+    query.push(
+      "(" +
+        publishers
+          .map((publisher) => `publisher = '${publisher}'`)
+          .join(" || ") +
+        ")",
+    );
   }
 
-  if (filters?.digital === "hide") filter.push("digital = false");
-  if (filters?.digital === "only") filter.push("digital = true");
+  if (digital === "hide") {
+    query.push("digital = false");
+  } else if (digital === "only") {
+    query.push("digital = true");
+  }
 
-  if (filters?.edition === false) filter.push("edition = ''");
+  if (edition === false) {
+    query.push("edition = ''");
+  }
 
-  const data = await $pb.collection(Collections.BooksDetails).getFullList<
-    BooksDetailsResponse<{
-      title: TitlesResponse;
-      publisher: PublishersResponse;
-    }>
-  >({
-    filter: filter.join(" && "),
-    sort: "+publishDate,+name,-edition",
-    expand: "title, publisher",
-  });
-
-  if (data.length === 0) return null;
-
-  return groupBy<
-    BooksDetailsResponse<{
-      title: TitlesResponse;
-      publisher: PublishersResponse;
-    }>
-  >(
-    structuredClone(data).map((release) => ({
-      ...release,
-      volume: parseVolume(release.volume),
-    })),
-    (p) => p.publishDate,
-  );
-};
-
-export const getReleases = async (id: string) => {
-  const { $pb } = useNuxtApp();
-
-  const data = await $pb.collection(Collections.Releases).getFullList<
-    ReleasesResponse<{
-      publisher: PublishersResponse;
-    }>
-  >({
-    filter: `title='${id}'`,
-    expand: "publisher",
-  });
-
-  return structuredClone(data);
-};
-
-export const getRecentReleases = async () => {
-  const { $pb } = useNuxtApp();
-  const now = dayjs.tz();
-
-  const data = await $pb.collection(Collections.BooksDetails).getFullList<
-    BooksDetailsResponse<{
-      publisher: PublishersResponse;
-    }>
-  >({
-    sort: "+publishDate",
-    filter: `publishDate >= '${now.startOf("day").format("YYYY-MM-DD")}'
-    && publishDate <= '${now
-      .add(3, "days")
-      .endOf("day")
-      .format("YYYY-MM-DD")}'`,
-    expand: "publisher",
-  });
-
-  return structuredClone(data).map((book) => ({
-    ...book,
-    volume: Math.floor(book.volume / 10000) + (book.volume % 10) * 0.1,
-  }));
-};
+  return query.join(" && ");
+}

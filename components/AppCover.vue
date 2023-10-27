@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import type { BaseSystemFields } from "@/types/pb";
+import type { MetadataImages } from "@/types/common";
 
 defineProps<{
-  book: Pick<BaseSystemFields, "id" | "collectionId"> & {
-    name: string;
-  };
-  fileName?: string;
-  sizes?: string;
+  name?: string;
+  src?: string;
+  srcset?: MetadataImages;
 }>();
 </script>
 
 <template>
-  <NuxtImg
-    v-if="fileName"
-    loading="lazy"
+  <AppImage
+    v-if="src"
     class="aspect-[2/3] h-full w-full object-cover"
-    :src="getPockerBaseImagePath(book, fileName)"
-    :sizes="sizes"
+    :src="src"
+    :srcset="srcset"
+    :alt="name"
   />
   <div
     v-else
@@ -24,11 +22,12 @@ defineProps<{
       'flex h-full w-full items-center justify-center text-center',
       'bg-gray-200 text-gray-500',
       'dark:bg-gray-800 dark:text-gray-400',
-      'font-montserrat font-bold',
+      'font-condensed font-bold',
       'p-6',
       'aspect-[2/3]',
     ]"
   >
-    {{ book.name }}
+    <span v-if="name">{{ name }}</span>
+    <span v-else>{{ $t("general.tba") }}</span>
   </div>
 </template>
