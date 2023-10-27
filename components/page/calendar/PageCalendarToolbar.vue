@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { joinURL } from "ufo";
 import { type Dayjs } from "dayjs";
 import type { FilterPublishers } from "@/utils/releases";
 import { Collections, type PublishersResponse } from "@/types/pb";
 
-const runtimeConfig = useRuntimeConfig();
 const { $pb } = useNuxtApp();
 
 const toolbar = ref<HTMLDivElement>();
@@ -17,14 +15,13 @@ const { data: publisherOptions } = await useAsyncData(
       publishers.map((publisher) => ({
         id: publisher.id,
         label: publisher.name,
-        avatar: {
-          src: joinURL(
-            runtimeConfig.public.pocketbaseUrl,
-            "/api/files",
-            getPockerBaseImagePath(publisher, publisher.logo),
-            "?thumb=24x24",
-          ),
-        },
+        avatar: publisher.logo
+          ? {
+              src: $pb.files.getUrl(publisher, publisher.logo, {
+                thumb: "24x24",
+              }),
+            }
+          : undefined,
       })),
   },
 );
@@ -49,7 +46,8 @@ const currentPublishers = computed({
   set: (value) => emit("update:publishers", value),
 });
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
   if (toolbar.value)
     document.documentElement.style.setProperty(
       "--toolbar-height",
@@ -110,7 +108,7 @@ onMounted(() => {
                   <UAvatar
                     v-for="publisher in currentPublishers"
                     :key="publisher.id"
-                    :src="publisher.avatar.src"
+                    :src="publisher.avatar?.src"
                     :alt="publisher.label"
                   />
                 </UAvatarGroup>
@@ -121,7 +119,7 @@ onMounted(() => {
               </span>
             </UButton>
           </USelectMenu>
-          <PageCalendarOptions />
+          <CalendarOptions />
         </div>
       </div>
     </div>

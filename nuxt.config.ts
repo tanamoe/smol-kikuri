@@ -5,6 +5,7 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL,
       pocketbaseUrl: process.env.POCKETBASE_URL,
       ogUrl: process.env.OG_URL,
+      imageUrl: process.env.IMAGE_URL,
       umamiUrl: process.env.UMAMI_URL,
       umamiSiteId: process.env.UMAMI_SITE_ID,
     },
@@ -66,4 +67,5 @@ export default defineNuxtConfig({
     langDir: "locales",
     defaultLocale: "vi",
   },
+  experimental: { appManifest: false },
 });
