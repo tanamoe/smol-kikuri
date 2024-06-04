@@ -21,7 +21,7 @@
   in {
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
-        packages = with pkgs; [traceroute dig node2nix nodejs bun ffmpeg];
+        packages = with pkgs; [node2nix nodejs bun];
       };
     });
   };
