@@ -34,7 +34,7 @@ const { pending, data, error } = await useAsyncData(
       sort: "+publishDate, -edition",
       expand: "publication, release, release.title",
       fields:
-        "*, expand.publication.volume, expand.publication.name, expand.publication.digital, expand.release.title, expand.release.expand.title.name",
+        "*, expand.publication.volume, expand.publication.name, expand.publication.digital, expand.release.title, expand.release.expand.title.name, expand.release.expand.title.slug",
     }),
   {
     watch: [filter],
