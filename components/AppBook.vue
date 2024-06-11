@@ -16,7 +16,10 @@ defineProps<{
     v-if="book.expand && book.expand.publication && book.expand.release"
     :to="
       book.expand?.release.title
-        ? joinURL('https://tana.moe', '/title/' + book.expand.release.title)
+        ? joinURL(
+            'https://tana.moe',
+            '/title/' + book.expand.release.expand?.title.slug,
+          )
         : ''
     "
     class="group"

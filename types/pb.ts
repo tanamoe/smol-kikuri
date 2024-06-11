@@ -3,7 +3,7 @@
  */
 
 import type PocketBase from "pocketbase";
-import { type RecordService } from "pocketbase";
+import type { RecordService } from "pocketbase";
 
 export enum Collections {
   BookDetails = "bookDetails",
@@ -11,12 +11,14 @@ export enum Collections {
   CollectionBooks = "collectionBooks",
   CollectionMembers = "collectionMembers",
   Collections = "collections",
+  Demographics = "demographics",
   Formats = "formats",
   Genres = "genres",
   LinkSources = "linkSources",
   Links = "links",
   Publications = "publications",
   Publishers = "publishers",
+  ReleaseDetails = "releaseDetails",
   Releases = "releases",
   Reviews = "reviews",
   Staffs = "staffs",
@@ -113,6 +115,11 @@ export type CollectionsRecord = {
   visibility?: CollectionsVisibilityOptions;
 };
 
+export type DemographicsRecord = {
+  name: string;
+  slug: string;
+};
+
 export type FormatsRecord = {
   color: string;
   decription?: HTMLString;
@@ -153,6 +160,24 @@ export type PublishersRecord = {
   logo?: string;
   name: string;
   slug: string;
+};
+
+export enum ReleaseDetailsStatusOptions {
+  "WAITING_FOR_APPROVAL" = "WAITING_FOR_APPROVAL",
+  "REGISTERED" = "REGISTERED",
+  "LICENSED" = "LICENSED",
+  "ON_GOING" = "ON_GOING",
+  "COMPLETED" = "COMPLETED",
+  "HIATUS" = "HIATUS",
+  "CANCELLED" = "CANCELLED",
+}
+export type ReleaseDetailsRecord<Tmetadata = unknown> = {
+  cover?: string;
+  metadata?: null | Tmetadata;
+  name: string;
+  publisher: RecordIdString;
+  status?: ReleaseDetailsStatusOptions;
+  title: RecordIdString;
 };
 
 export enum ReleasesStatusOptions {
@@ -200,11 +225,14 @@ export type TitleCoversRecord<
 
 export type TitlesRecord<Tmetadata = unknown> = {
   cover?: string;
+  demographic?: RecordIdString;
   description?: HTMLString;
   format: RecordIdString;
   genres?: RecordIdString[];
   metadata?: null | Tmetadata;
   name: string;
+  slug?: string;
+  slugGroup?: string;
 };
 
 export type UsersRecord = {
@@ -238,6 +266,8 @@ export type CollectionMembersResponse<Texpand = unknown> =
   Required<CollectionMembersRecord> & BaseSystemFields<Texpand>;
 export type CollectionsResponse<Texpand = unknown> =
   Required<CollectionsRecord> & BaseSystemFields<Texpand>;
+export type DemographicsResponse<Texpand = unknown> =
+  Required<DemographicsRecord> & BaseSystemFields<Texpand>;
 export type FormatsResponse<Texpand = unknown> = Required<FormatsRecord> &
   BaseSystemFields<Texpand>;
 export type GenresResponse<Texpand = unknown> = Required<GenresRecord> &
@@ -252,6 +282,10 @@ export type PublicationsResponse<
 > = Required<PublicationsRecord<Tmetadata>> & BaseSystemFields<Texpand>;
 export type PublishersResponse<Texpand = unknown> = Required<PublishersRecord> &
   BaseSystemFields<Texpand>;
+export type ReleaseDetailsResponse<
+  Tmetadata = unknown,
+  Texpand = unknown,
+> = Required<ReleaseDetailsRecord<Tmetadata>> & BaseSystemFields<Texpand>;
 export type ReleasesResponse<Texpand = unknown> = Required<ReleasesRecord> &
   BaseSystemFields<Texpand>;
 export type ReviewsResponse<Texpand = unknown> = Required<ReviewsRecord> &
@@ -286,12 +320,14 @@ export type CollectionRecords = {
   collectionBooks: CollectionBooksRecord;
   collectionMembers: CollectionMembersRecord;
   collections: CollectionsRecord;
+  demographics: DemographicsRecord;
   formats: FormatsRecord;
   genres: GenresRecord;
   linkSources: LinkSourcesRecord;
   links: LinksRecord;
   publications: PublicationsRecord;
   publishers: PublishersRecord;
+  releaseDetails: ReleaseDetailsRecord;
   releases: ReleasesRecord;
   reviews: ReviewsRecord;
   staffs: StaffsRecord;
@@ -307,12 +343,14 @@ export type CollectionResponses = {
   collectionBooks: CollectionBooksResponse;
   collectionMembers: CollectionMembersResponse;
   collections: CollectionsResponse;
+  demographics: DemographicsResponse;
   formats: FormatsResponse;
   genres: GenresResponse;
   linkSources: LinkSourcesResponse;
   links: LinksResponse;
   publications: PublicationsResponse;
   publishers: PublishersResponse;
+  releaseDetails: ReleaseDetailsResponse;
   releases: ReleasesResponse;
   reviews: ReviewsResponse;
   staffs: StaffsResponse;
@@ -335,12 +373,14 @@ export type TypedPocketBase = PocketBase & {
     idOrName: "collectionMembers",
   ): RecordService<CollectionMembersResponse>;
   collection(idOrName: "collections"): RecordService<CollectionsResponse>;
+  collection(idOrName: "demographics"): RecordService<DemographicsResponse>;
   collection(idOrName: "formats"): RecordService<FormatsResponse>;
   collection(idOrName: "genres"): RecordService<GenresResponse>;
   collection(idOrName: "linkSources"): RecordService<LinkSourcesResponse>;
   collection(idOrName: "links"): RecordService<LinksResponse>;
   collection(idOrName: "publications"): RecordService<PublicationsResponse>;
   collection(idOrName: "publishers"): RecordService<PublishersResponse>;
+  collection(idOrName: "releaseDetails"): RecordService<ReleaseDetailsResponse>;
   collection(idOrName: "releases"): RecordService<ReleasesResponse>;
   collection(idOrName: "reviews"): RecordService<ReviewsResponse>;
   collection(idOrName: "staffs"): RecordService<StaffsResponse>;
