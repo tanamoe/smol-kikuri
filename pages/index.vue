@@ -31,7 +31,7 @@ const { pending, data, error } = await useAsyncData(
   () =>
     $pb.collection(Collections.BookDetails).getFullList<BookDetailsCommon>({
       filter: filter.value,
-      sort: "+publishDate, -edition",
+      sort: "+publishDate, +release.title.name, +publication.volume, +edition",
       expand: "publication, release, release.title",
       fields:
         "*, expand.publication.volume, expand.publication.name, expand.publication.digital, expand.release.title, expand.release.expand.title.name, expand.release.expand.title.slug",
