@@ -36,7 +36,10 @@ const ui = {
 </script>
 
 <template>
-  <NuxtLink :to="title && joinURL('/title/' + title.slug)" class="group">
+  <NuxtLink
+    :to="title && joinURL('https://tana.moe/title/' + title.slug)"
+    class="group"
+  >
     <UCard :ui="ui">
       <UBadge
         v-if="release && release.digital == true"
