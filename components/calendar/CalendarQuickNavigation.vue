@@ -27,6 +27,8 @@ const nearestDay = computed(() => {
       })
       .format("YYYY-MM-DD");
   }
+
+  return null;
 });
 
 function doScroll(position: string) {
@@ -73,6 +75,7 @@ onUnmounted(() => {
     <div class="flex gap-3">
       <UButton
         color="gray"
+        class="touch-none"
         icon="i-fluent-chevron-up-20-filled"
         :disabled="dates.indexOf(position) === -1"
         square
@@ -99,6 +102,7 @@ onUnmounted(() => {
       </UButton>
       <UButton
         color="gray"
+        class="touch-none"
         icon="i-fluent-chevron-down-20-filled"
         :disabled="dates.indexOf(position) === dates.length - 0"
         square

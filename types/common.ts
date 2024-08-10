@@ -1,6 +1,8 @@
 import type {
-  BookDetailsResponse,
+  AssetsResponse,
+  BooksResponse,
   PublicationsResponse,
+  PublishersResponse,
   ReleasesResponse,
   TitleCoversResponse,
   TitlesResponse,
@@ -19,17 +21,26 @@ export type MetadataCommon = {
   images: MetadataImages | MetadataImages[];
 };
 
-export type BookDetailsCommon = BookDetailsResponse<
-  MetadataCommon,
-  string,
+export type BooksCommon = BooksResponse<
+  unknown,
   {
-    publication: Pick<PublicationsResponse, "volume" | "name" | "digital">;
-    release: Pick<
-      ReleasesResponse<{
-        title: Pick<TitlesResponse, "name" | "slug">;
-      }>,
-      "expand" | "title"
+    publication: PublicationsResponse<
+      unknown,
+      {
+        release: ReleasesResponse<{
+          publisher: PublishersResponse;
+          partner?: PublishersResponse;
+          title: TitlesResponse;
+        }>;
+        defaultBook?: BooksResponse<
+          unknown,
+          {
+            assets_via_book?: AssetsResponse<MetadataImages>[];
+          }
+        >;
+      }
     >;
+    assets_via_book?: AssetsResponse<MetadataImages>[];
   }
 >;
 

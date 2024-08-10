@@ -3,7 +3,10 @@ export type FilterDigital = "show" | "hide" | "only";
 export type FilterPublishers = {
   id: string;
   label: string;
-  [k: string]: any;
+  avatar?: {
+    src: string;
+  };
+  [k: string]: unknown;
 };
 
 export function parseCalendarFilter(
@@ -23,16 +26,19 @@ export function parseCalendarFilter(
     query.push(
       "(" +
         publishers
-          .map((publisher) => `publisher = '${publisher}'`)
+          .map(
+            (publisher) =>
+              `publication.release.publisher = '${publisher}' || publication.release.partner = '${publisher}'`,
+          )
           .join(" || ") +
         ")",
     );
   }
 
   if (digital === "hide") {
-    query.push("digital = false");
+    query.push("publication.release.digital = false");
   } else if (digital === "only") {
-    query.push("digital = true");
+    query.push("publication.release.digital = true");
   }
 
   if (edition === false) {
