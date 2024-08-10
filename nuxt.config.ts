@@ -50,6 +50,10 @@ export default defineNuxtConfig({
     },
   },
 
+  icon: {
+    serverBundle: "remote",
+  },
+
   googleFonts: {
     families: {
       Inter: [400, 700],
