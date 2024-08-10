@@ -16,7 +16,8 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/google-fonts",
     "@nuxt/image",
-    "@nuxthq/ui",
+    "@nuxt/eslint",
+    "@nuxt/ui",
   ],
   // https://nuxt.com/docs/getting-started/installation#prerequisites
   typescript: {
@@ -50,9 +51,6 @@ export default defineNuxtConfig({
       Montserrat: [700, 900],
     },
   },
-  ui: {
-    icons: ["fluent", "simple-icons"],
-  },
   i18n: {
     strategy: "no_prefix",
     locales: [
@@ -67,5 +65,4 @@ export default defineNuxtConfig({
     langDir: "locales",
     defaultLocale: "vi",
   },
-  experimental: { appManifest: false },
 });
