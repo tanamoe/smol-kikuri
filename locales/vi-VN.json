@@ -29,7 +29,9 @@
     "viewTitleDetails": "Xem chi tiết",
     "bookPrice": "Giá dự kiến",
     "publishedBy": "Phát hành bởi",
-    "publisher": "Nhà xuất bản"
+    "publisher": "Nhà xuất bản",
+    "monthAfter": "Tháng sau",
+    "monthPrevious": "Tháng trước"
   },
   "settings": {
     "interface": "Hiển thị",
