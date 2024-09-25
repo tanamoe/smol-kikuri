@@ -21,7 +21,7 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "^8.5.5",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
-    "@types/node": "~20.16.7",
+    "@types/node": "~22.7.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "nuxt": "^3.13.2",
