@@ -38,7 +38,7 @@
     "@popperjs/core": "^2.11.8",
     "class-variance-authority": "^0.7.0",
     "dayjs": "^1.11.13",
-    "pinia": "^2.2.2",
+    "pinia": "^3.0.0",
     "pocketbase": "^0.21.5"
   }
 }
